@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片懒加载</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <img data-src="https://w.wallhaven.cc/full/wq/wallhaven-wqve97.png" alt="1" />
+  <img data-src="https://w.wallhaven.cc/full/v9/wallhaven-v9v3r5.jpg" alt="2" />
+  <img data-src="https://w.wallhaven.cc/full/k7/wallhaven-k7v9yq.png" alt="3" />
+  <img data-src="https://w.wallhaven.cc/full/rd/wallhaven-rdwjj7.jpg" alt="4" />
+  <img data-src="https://w.wallhaven.cc/full/z8/wallhaven-z8dg9y.png" alt="5" />
+  <img data-src="https://w.wallhaven.cc/full/6o/wallhaven-6op786.jpg" alt="6" />
+  <img data-src="https://w.wallhaven.cc/full/72/wallhaven-72rd8e.jpg" alt="7" />
+  <img data-src="https://w.wallhaven.cc/full/72/wallhaven-72rxqo.jpg" alt="8" />
+  <img data-src="https://w.wallhaven.cc/full/8o/wallhaven-8oev1j.jpg" alt="9" />
+  <img data-src="https://w.wallhaven.cc/full/x8/wallhaven-x8z9yo.jpg" alt="10" />
+  <img data-src="https://w.wallhaven.cc/full/8o/wallhaven-8oky1j.jpg" alt="11" />
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.js"></script>
+  <script>
+    const observer = new IntersectionObserver((images) => {
+      images.forEach((image) => {
+        if (image.isIntersecting) {
+          const img = image.target;
+          img.src = img.dataset.src;
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    const images = document.querySelectorAll("img");
+    images.forEach(image => {
+      observer.observe(image);
+    })
+  </script>
+</body>
+
+</html>
